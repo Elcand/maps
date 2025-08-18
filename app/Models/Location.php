@@ -12,4 +12,13 @@ class Location extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    protected static function booted()
+    {
+        static::creating(function ($model) {
+            if (!$model->check_in_time) {
+                $model->check_in_time = now();
+            }
+        });
+    }
 }
