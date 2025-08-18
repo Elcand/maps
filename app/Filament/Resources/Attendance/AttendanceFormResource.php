@@ -13,6 +13,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -65,7 +66,10 @@ class AttendanceFormResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('user.name')->sortable()->searchable(),
+                TextColumn::make('check_in_time')->date('H:i'),
+                TextColumn::make('latitude')->sortable()->searchable(),
+                TextColumn::make('longitude')->sortable()->searchable(),
             ])
             ->filters([
                 //
