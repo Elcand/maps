@@ -17,6 +17,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -54,6 +55,18 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+            ->plugin(
+                FilamentFullCalendarPlugin::make()
+                    ->schedulerLicenseKey('null')
+                    ->selectable()
+                    ->editable()
+                    ->timezone(config('app.timezone'))
+                    ->locale(config('app.locale'))
+                    ->plugins(['interaction', 'dayGrid', 'timeGrid', 'list', 'resourceTimeline'])
+                    ->config([
+                        'plugins' => ['interaction', 'dayGrid', 'timeGrid', 'list', 'resourceTimeline'],
+                    ])
+            )
             ->spa();
     }
 }
