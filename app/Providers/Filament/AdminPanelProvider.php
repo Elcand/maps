@@ -57,14 +57,19 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugin(
                 FilamentFullCalendarPlugin::make()
-                    ->schedulerLicenseKey('null')
-                    ->selectable()
-                    ->editable()
-                    ->timezone(config('app.timezone'))
-                    ->locale(config('app.locale'))
-                    ->plugins(['interaction', 'dayGrid', 'timeGrid', 'list', 'resourceTimeline'])
+                    // ->schedulerLicenseKey()
+                    ->selectable(true)
+                    ->editable(true)
+                    ->timezone('Asia/Jakarta')
+                    ->locale('id')
+                    ->plugins(['dayGrid', 'timeGrid', 'interaction'])
                     ->config([
-                        'plugins' => ['interaction', 'dayGrid', 'timeGrid', 'list', 'resourceTimeline'],
+                        'headerToolbar' => [
+                            'left' => 'prev,next today',
+                            'center' => 'title',
+                            'right' => 'dayGridMonth,timeGridWeek,timeGridDay'
+                        ],
+                        'firstDay' => 1,
                     ])
             )
             ->spa();
